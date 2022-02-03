@@ -21,17 +21,17 @@ namespace Business.Concrete
 
         public void Delete(Color color)
         {
-            throw new NotImplementedException();
+            _colorDal.Delete(color);
         }
 
         public List<Color> GetAll()
         {
-            throw new NotImplementedException();
+            return _colorDal.GetAll();
         }
 
         public void Update(Color color)
         {
-            throw new NotImplementedException();
+            _colorDal.Update(color);
         }
     }
 }

@@ -7,46 +7,25 @@ using System.Linq.Expressions;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Core.DataAccess.EntityFramework;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, ReCapDBContext>, ICarDal
     {
-        public void Add(Car entity)
+        public List<CarDetailDto> GetCarDetails()
         {
-            using (ReCapDBContext context = new ReCapDBContext())
+            using (ReCapDBContext context= new ReCapDBContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
+                var result = from p in context.Cars
+                             join b in context.Brands
+                              on p.BrandId equals b.Id
+                             join c in context.Colors
+                             on p.ColorId equals c.Id
+                             select new CarDetailDto { BrandName = b.BrandName, Id = p.Id, CarName = p.CarName, ColorName = c.ColorName, DailyPrice = p.DailyPrice, Description = p.Description, ModelYear = p.ModelYear };
+                return result.ToList();
             }
         }
-
-        public void Delete(Car entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Car Get(Expression<Func<Car, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (ReCapDBContext context = new ReCapDBContext())
-            {
-                return context.Set<Car>().ToList();
-            }
-        }
-
-       
-
-        public void Update(Car entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        
     }
 }
