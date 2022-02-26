@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class BrandManager : BrandService
+    public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
         public BrandManager(IBrandDal brandDal)

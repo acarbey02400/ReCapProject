@@ -2,17 +2,17 @@
 using Core.Entity.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.Concrete
 {
-    public class UsersManager : IUsersService
+   public class UserManager:IUserService
     {
+
         IUsersDal _usersDal;
-        public UsersManager(IUsersDal usersDal)
+        public UserManager(IUsersDal usersDal)
         {
             _usersDal = usersDal;
         }
