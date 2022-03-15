@@ -36,7 +36,6 @@ namespace ConsoleUI
                 Console.WriteLine("Error");
             }
 
-           
 
 
         }
